@@ -1,0 +1,15 @@
+add node0 : JavascriptNode
+add sync : WSGroup
+add node0.wsIn : org.nodered.WebSocketIn
+add node0.printer: ConsolePrinter
+add chan: LocalChannel
+
+attach node0 sync
+
+set sync.master = 'node0'
+set node0.logLevel = 'DEBUG'
+set node0.wsIn.connectTo = 'true'
+set node0.wsIn.url = 'ws://ws.kevoree.org/dredre'
+
+bind node0.wsIn.out chan
+bind node0.printer.input chan
